@@ -19,7 +19,14 @@ def _generate_rules_url(url):
     if ".json" not in url:
         raise BadPowerTrackUrlException("Doesn't end with .json")
     
-    return url.replace(".json", "/rules.json").replace("stream.gnip.com", "api.gnip.com")
+    if "stream.gnip.com" in url:
+        return (url
+            .replace(".json", "/rules.json")
+            .replace("stream.gnip.com", "api.gnip.com"))
+    else:
+        return (url
+            .replace("/stream/accounts/", "/rules/accounts/")
+            .replace("gnip-stream.twitter", "gnip-api.twitter"))
 
 
 def _generate_post_object(rules_list):
