@@ -77,15 +77,6 @@ class RulesTestCase(unittest.TestCase):
         rules_url = rules._generate_rules_url(url)
         self.assertEqual(expected, rules_url)
 
-    def test_build_rules_url_bad(self):
-        """ Make sure rules URL fails with incorrect PowerTrack URL. """
-        try:
-            url = "http://google.com/asdf.xml"
-            rules._generate_rules_url(url)
-        except BadPowerTrackUrlException:
-            return
-        self.fail("_generate_rules_url was supposed to throw a BadPowerTrackUrlException")
-
     def test_build_post_object(self):
         """ Generate rules object to post. """
         rules_list = self._generate_rules_list()

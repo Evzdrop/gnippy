@@ -18,9 +18,7 @@ def _generate_rules_url(url):
     """ Generate a rules URL from a PowerTrack URL """
     if ".json" not in url:
         raise BadPowerTrackUrlException("Doesn't end with .json")
-    if "stream.gnip.com" not in url:
-        raise BadPowerTrackUrlException("Doesn't contain stream.gnip.com")
-
+    
     return url.replace(".json", "/rules.json").replace("stream.gnip.com", "api.gnip.com")
 
 
