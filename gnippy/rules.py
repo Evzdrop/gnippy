@@ -91,6 +91,10 @@ def _post(conf, built_rules):
     if not r.status_code in range(200, 300):
         error_text = "HTTP Response Code: %s, Text: '%s'" % (str(r.status_code), r.text)
         raise RuleAddFailedException(error_text)
+    try:
+        return r.json() 
+    except ValueError as e:
+        return None
 
 def _generate_delete_url(conf):
     """
@@ -145,13 +149,13 @@ def add_rule(rule_string, tag=None, **kwargs):
     conf = config.resolve(kwargs)
     rule = build(rule_string, tag)
     rules_list = [rule,]
-    _post(conf, rules_list)
+    return _post(conf, rules_list)
 
 
 def add_rules(rules_list, **kwargs):
     """ Synchronously add multiple rules to GNIP PowerTrack in one go. """
     conf = config.resolve(kwargs)
-    _post(conf, rules_list)
+    return _post(conf, rules_list)
 
 
 def get_rules(**kwargs):
