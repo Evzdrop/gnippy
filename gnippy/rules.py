@@ -25,7 +25,7 @@ def _generate_rules_url(url):
             .replace("stream.gnip.com", "api.gnip.com"))
     else:
         return (url
-            .replace("/stream/accounts/", "/rules/accounts/")
+            .replace("/stream/powertrack/accounts/", "/rules/powertrack/accounts/")
             .replace("gnip-stream.twitter", "gnip-api.twitter"))
 
 
